@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashSet;
 
 class Node {
     private double f;
@@ -10,14 +11,8 @@ class Node {
     private int col;
     private boolean blocked;
     private Node parent;
-    private final int[][] blockedNodes = {
-            {10, 4},
-            {7, 14},
-            {3, 3},
-            {3, 4},
-            {3, 5},
-            {4, 3}
-    };
+
+
 
 
     public Node(double f, double g, double h, int row, int col, Node parent){
@@ -27,6 +22,8 @@ class Node {
         this.row = row;
         this.col = col;
         this.parent = parent;
+
+
     }
     public double getF(){
         return f;
@@ -80,19 +77,16 @@ class Node {
     public void draw(Sketch s){
         s.ellipse((col+1)*offset,(row+1)*offset,5,5);
     }
+
+
     public boolean isBlocked() {
-        for(int i = 0;i<AStar.ROWS;i++){
-            for(int j=0;j<AStar.COLS;j++){
-                for(int k=0;k<blockedNodes.length;k++){
-                    if(row == blockedNodes[k][0] && col == blockedNodes[k][1])
-                        return true;
-                }
-            }
-        }
+        if(Sketch.blockedNodes.contains(Sketch.coordinate(this.col, this.row)))
+            return true;
         return false;
     }
 
     public void setBlocked(boolean blocked) {
         this.blocked = blocked;
     }
+
 }

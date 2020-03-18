@@ -40,9 +40,15 @@ public class AStar{
                     n.setH(heuristics(n));
                     n.setF();
                     if (!skipable(openList, n) && !skipable(closedList, n)) {
-                        s.fill(255, 255, 0);
-                        n.draw(s);
-                        openList.add(n);
+                        if(!n.isBlocked()) {
+                            s.fill(255, 255, 0);
+                            n.draw(s);
+                            openList.add(n);
+                        }
+                        else{
+                            s.fill(255,0,0);
+                            n.draw(s);
+                        }
                     }
             }
             closedList.add(q);
